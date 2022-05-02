@@ -1,0 +1,38 @@
+body {
+  overflow-x: hidden;
+  color: white;
+  background-color: rgb(36, 28, 28);
+  font-family: 'Ubuntu', sans-serif;
+}
+.header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 15px 50px 15px 50px;
+}
+.header-timer {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: calc(14px + 2vmin);
+}
+.header-logo {
+  font-family: 'Pacifico', cursive;
+  font-size: calc(14px + 2vmin);
+}
+.header-logo-accent-one {
+  color: rgb(0, 145, 255);
+}
+.header-logo-accent-two {
+  color: rgb(238, 0, 255);
+}
+.header {
+  width: 100vw;
+}
+.find-image-container {
+  width: 100vw;
+}
+.find-image {
+  object-fit: fill;
+  width: 100%;
+  cursor: pointer;
+}
