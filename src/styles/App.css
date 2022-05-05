@@ -1,9 +1,12 @@
 body {
+  position: relative;
   overflow-x: hidden;
   color: white;
   background-color: rgb(36, 28, 28);
   font-family: 'Ubuntu', sans-serif;
+  min-height: 100%;
 }
+
 .header-content {
   display: flex;
   flex-direction: row;
@@ -35,4 +38,47 @@ body {
   object-fit: fill;
   width: 100%;
   cursor: pointer;
+}
+.credits-icon {
+  width: 50px;
+}
+.hidden {
+  visibility: hidden;
+}
+.credits-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  bottom: 30px;
+  left: 30px;
+  width: 75px;
+  height: 100px;
+  cursor: pointer;
+}
+.credits-content {
+  position: absolute;
+  bottom: 70px;
+  width: 300px;
+  background-color: rgb(36, 28, 28);
+  list-style: square;
+  padding: 20px 20px 0 20px;
+}
+.credits-content > ul {
+  list-style: circle;
+  list-style-position: inside;
+  color: rgb(0, 145, 255);
+}
+.credits-content > ul > li {
+  margin-bottom: 20px;
+  color: rgb(238, 0, 255);
+}
+a:link {
+  color: rgb(0, 145, 255);
+}
+a:visited {
+  color: rgb(238, 0, 255);
+}
+footer {
+  width: 100vw;
 }

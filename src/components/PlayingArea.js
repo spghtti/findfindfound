@@ -31,11 +31,11 @@ const PlayingArea = () => {
       backgroundColor: 'white',
       position: 'absolute',
       width: '150px',
-      height: '250px',
+      minHeight: '150px',
     };
 
     return React.createElement('div', {
-      style: { ...dropdownMenuStyle, left: '90px', top: '90px' },
+      style: { ...dropdownMenuStyle, left: '80px', top: '80px' },
     });
   };
 
