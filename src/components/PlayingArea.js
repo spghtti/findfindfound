@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import cyberpunkScene from '../images/Zurgetron.png';
+import HiddenObjects from './HiddenObjects';
 
 const PlayingArea = () => {
   const [target, setTarget] = useState();
@@ -10,9 +11,10 @@ const PlayingArea = () => {
       position: 'absolute',
       width: '75px',
       height: '75px',
+      borderRadius: '50%',
     };
 
-    const newDiv = React.createElement(
+    const target = React.createElement(
       'div',
       {
         style: {
@@ -20,23 +22,32 @@ const PlayingArea = () => {
           top: `${e.pageY - 35}px`,
           left: `${e.pageX - 35}px`,
         },
+        className: 'noclick',
       },
       showDropdownMenu(e.pageX, e.pageY)
     );
-    setTarget(newDiv);
+    setTarget(target);
   };
 
   const showDropdownMenu = (x, y) => {
     const dropdownMenuStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'rgb(36, 28, 28)',
       position: 'absolute',
-      width: '150px',
-      minHeight: '150px',
+      transform: 'translateX(45%) translateY(40%)',
+      width: '9rem',
+      height: 'auto',
     };
 
-    return React.createElement('div', {
-      style: { ...dropdownMenuStyle, left: '80px', top: '80px' },
-    });
+    return React.createElement(
+      'div',
+      {
+        style: {
+          ...dropdownMenuStyle,
+          pointerEvents: 'auto',
+        },
+      },
+      <HiddenObjects />
+    );
   };
 
   const handleClick = (event) => {
