@@ -14,9 +14,19 @@ const HiddenObjects = () => {
   );
 
   const objectArray = [
-    { name: 'Stand mixer', image: 'mixer', link: '../images/mixer' },
-    { name: 'Tropical bird', image: 'bird', link: '../images/bird' },
-    { name: 'Golden egg', image: 'egg', link: '../images/egg' },
+    {
+      name: 'Stand mixer',
+      image: 'mixer',
+      link: '../images/mixer',
+      isFound: false,
+    },
+    {
+      name: 'Tropical bird',
+      image: 'bird',
+      link: '../images/bird',
+      isFound: false,
+    },
+    { name: 'Golden egg', image: 'egg', link: '../images/egg', isFound: false },
   ];
 
   return (

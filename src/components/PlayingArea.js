@@ -4,6 +4,7 @@ import HiddenObjects from './HiddenObjects';
 
 const PlayingArea = () => {
   const [target, setTarget] = useState();
+  const [hasClicked, setHasClicked] = useState(false);
 
   const showSelectionBox = (e) => {
     const targetStyle = {
@@ -12,6 +13,7 @@ const PlayingArea = () => {
       width: '75px',
       height: '75px',
       borderRadius: '50%',
+      visibility: `${hasClicked ? 'visible' : 'hidden'}`,
     };
 
     const target = React.createElement(
@@ -19,23 +21,25 @@ const PlayingArea = () => {
       {
         style: {
           ...targetStyle,
-          top: `${e.pageY - 35}px`,
-          left: `${e.pageX - 35}px`,
+          top: `${e.pageY - 50}px`,
+          left: `${e.pageX - 40}px`,
         },
+        id: 'target',
         className: 'noclick',
       },
       showDropdownMenu(e.pageX, e.pageY)
     );
     setTarget(target);
+    hasClicked ? setHasClicked(false) : setHasClicked(true);
   };
 
   const showDropdownMenu = (x, y) => {
     const dropdownMenuStyle = {
-      backgroundColor: 'rgb(36, 28, 28)',
       position: 'absolute',
       transform: 'translateX(45%) translateY(40%)',
       width: '9rem',
       height: 'auto',
+      visibility: `${hasClicked ? 'visible' : 'hidden'}`,
     };
 
     return React.createElement(
@@ -45,11 +49,11 @@ const PlayingArea = () => {
           ...dropdownMenuStyle,
           pointerEvents: 'auto',
         },
+        id: 'dropdown-menu',
       },
       <HiddenObjects />
     );
   };
-
   const handleClick = (event) => {
     showSelectionBox(event);
   };

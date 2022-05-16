@@ -92,7 +92,6 @@ footer {
 .hidden-object-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
   align-items: center;
 }
 .hidden-object-list-item {
@@ -101,11 +100,21 @@ footer {
   align-items: center;
   justify-content: left;
   width: 100%;
-  border-bottom: 2px solid gray;
+  cursor: pointer;
+  background: rgb(211, 196, 196);
+  color: black;
+  padding: 5px;
+}
+.hidden-object-list-item:hover {
+  background: rgb(144, 126, 126);
 }
 .hidden-object-list-item-icon {
   width: 100%;
 }
 .hidden-object-list-item-icon-container {
   width: 40px;
+  margin-right: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
