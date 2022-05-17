@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { collection, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAd9FCpaGT09YRHkPeVUOK3b5smcTEJq0g',
@@ -17,17 +16,17 @@ const firebaseApp = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(firebaseApp);
 
-(async () => {
-  try {
-    const docRef = await addDoc(collection(db, 'users'), {
-      first: 'Ada',
-      last: 'Lovelace',
-      born: 1815,
-    });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-})();
+// Example of writing data to Firestore
+// (async () => {
+//   try {
+//     const docRef = await addDoc(collection(db, 'users'), {
+//       name: 'Ada',
+//       born: 1815,
+//     });
+//     console.log('Document written with ID: ', docRef.id);
+//   } catch (e) {
+//     console.error('Error adding document: ', e);
+//   }
+// })();
 
-export default firebaseApp;
+export { firebaseApp, db };

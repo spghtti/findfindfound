@@ -1,5 +1,4 @@
 import './styles/App.css';
-import firebaseApp from './firebase';
 import React from 'react';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
@@ -14,7 +13,6 @@ function App() {
       <Header />
       <PlayingArea />
       <Footer />
-      {console.log(firebaseApp)}
     </div>
   );
 }
