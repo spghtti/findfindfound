@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import cyberpunkScene from '../images/Zurgetron.png';
 import HiddenObjects from './HiddenObjects';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase';
 
 const PlayingArea = () => {
   const [target, setTarget] = useState();
@@ -54,29 +52,12 @@ const PlayingArea = () => {
         },
         id: 'dropdown-menu',
       },
-      <HiddenObjects />
+      <HiddenObjects coords={[x, y]} />
     );
   };
-  const getLocations = () => {
-    async function querySnapshot() {
-      return await getDocs(collection(db, 'locations'));
-    }
-    let array = [];
-    (async () => {
-      const result = await querySnapshot();
-      result.forEach((doc) => {
-        array.push({ name: doc.id, location: doc.data().location });
-      });
-    })();
-    return array;
-  };
-  const checkGuess = (value, x, y) => {
-    const answers = getLocations();
-  };
+
   const handleClick = (event) => {
-    const coords = [Number(event.pageX), Number(event.pageY)];
     showSelectionBox(event);
-    checkGuess();
   };
 
   return (
