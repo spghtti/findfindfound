@@ -1,5 +1,5 @@
 import React from 'react';
-import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const HiddenObjects = (props) => {
@@ -39,7 +39,7 @@ const HiddenObjects = (props) => {
     },
   ];
 
-  const getLocations = () => {
+  function getLocations() {
     async function querySnapshot() {
       return await getDocs(collection(db, 'locations'));
     }
@@ -51,14 +51,25 @@ const HiddenObjects = (props) => {
       });
     })();
     return array;
+  }
+
+  const checkAccuracy = (guessArray, answerArray) => {
+    const xDiff = Math.abs((answerArray[0] - guessArray[0]) / guessArray[0]);
+    const yDiff = Math.abs((answerArray[1] - guessArray[1]) / guessArray[1]);
+    if (xDiff < 0.13 && yDiff < 0.13) {
+      return true;
+    }
+    return false;
   };
 
   const checkGuess = (value, coords) => {
-    const answers = getLocations();
-    console.log(`${value} => ${coords}`);
-    // for (let i = 0; i < answers.length; i++) {
-    //   if (value.name === )
-    // }
+    const intCoords = [Number(coords[0]), Number(coords[1])];
+    console.log(`${value} => ${intCoords}`);
+    const docRef = doc(db, 'locations', 'bird');
+    (async () => {
+      const docSnap = await getDoc(docRef);
+      console.log(docSnap.data());
+    })();
   };
 
   const handleSelection = (event) => {

@@ -5,8 +5,16 @@ import HiddenObjects from './HiddenObjects';
 const PlayingArea = () => {
   const [target, setTarget] = useState();
   const [hasClicked, setHasClicked] = useState(true);
+  // const [menuCoords, setMenuCoords] = useState();
 
-  const showSelectionBox = (e) => {
+  const showSelectionTarget = (e) => {
+    const x = e.pageX;
+    const y = e.pageY;
+    const offsetWidth = e.target.offsetWidth;
+    const offsetHeight = e.target.offsetHeight;
+    const relX = x / offsetWidth;
+    const relY = (y - 50) / offsetHeight;
+
     const targetStyle = {
       outline: '4px solid white',
       position: 'absolute',
@@ -27,14 +35,13 @@ const PlayingArea = () => {
         id: 'target',
         className: 'noclick',
       },
-      showDropdownMenu(e.pageX, e.pageY)
+      showDropdownMenu(relX, relY)
     );
     setTarget(target);
     hasClicked ? setHasClicked(false) : setHasClicked(true);
   };
 
   const showDropdownMenu = (x, y) => {
-    console.log(x, y);
     const dropdownMenuStyle = {
       position: 'absolute',
       transform: 'translateX(45%) translateY(40%)',
@@ -57,7 +64,7 @@ const PlayingArea = () => {
   };
 
   const handleClick = (event) => {
-    showSelectionBox(event);
+    showSelectionTarget(event);
   };
 
   return (
