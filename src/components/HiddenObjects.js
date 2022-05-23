@@ -56,21 +56,20 @@ const HiddenObjects = (props) => {
   const checkAccuracy = (guessArray, answerArray) => {
     const xDiff = Math.abs((answerArray[0] - guessArray[0]) / guessArray[0]);
     const yDiff = Math.abs((answerArray[1] - guessArray[1]) / guessArray[1]);
-    if (xDiff < 0.13 && yDiff < 0.13) {
+    if (xDiff < 0.035 && yDiff < 0.03) {
       return true;
     }
     return false;
   };
 
-  const checkGuess = (value, coords) => {
+  async function checkGuess(value, coords) {
     const intCoords = [Number(coords[0]), Number(coords[1])];
     console.log(`${value} => ${intCoords}`);
-    const docRef = doc(db, 'locations', 'bird');
-    (async () => {
-      const docSnap = await getDoc(docRef);
-      console.log(docSnap.data());
-    })();
-  };
+    const docRef = doc(db, 'locations', `${value}`);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data().location);
+    console.log(checkAccuracy(intCoords, docSnap.data().location));
+  }
 
   const handleSelection = (event) => {
     checkGuess(event.target.attributes.value.value, props.coords);

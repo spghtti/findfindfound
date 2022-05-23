@@ -5,9 +5,12 @@ import HiddenObjects from './HiddenObjects';
 const PlayingArea = () => {
   const [target, setTarget] = useState();
   const [hasClicked, setHasClicked] = useState(true);
-  // const [menuCoords, setMenuCoords] = useState();
+
+  const width = window.innerWidth;
+  const height = window.innerHeight;
 
   const showSelectionTarget = (e) => {
+    //find absolute coordinates
     const x = e.pageX;
     const y = e.pageY;
     const offsetWidth = e.target.offsetWidth;
@@ -15,11 +18,13 @@ const PlayingArea = () => {
     const relX = x / offsetWidth;
     const relY = (y - 50) / offsetHeight;
 
+    console.log([relX, relY]);
+
     const targetStyle = {
       outline: '4px solid white',
       position: 'absolute',
-      width: '75px',
-      height: '75px',
+      width: '7vw',
+      height: '14vh',
       borderRadius: '50%',
       visibility: `${hasClicked ? 'visible' : 'hidden'}`,
     };
@@ -29,8 +34,8 @@ const PlayingArea = () => {
       {
         style: {
           ...targetStyle,
-          top: `${e.pageY - 50}px`,
-          left: `${e.pageX - 40}px`,
+          top: `${e.pageY - 35}px`,
+          left: `${e.pageX - 29}px`,
         },
         id: 'target',
         className: 'noclick',
@@ -59,7 +64,11 @@ const PlayingArea = () => {
         },
         id: 'dropdown-menu',
       },
-      <HiddenObjects coords={[x, y]} />
+      <HiddenObjects
+        coords={[x, y]}
+        windowWidth={width}
+        windowHeight={height}
+      />
     );
   };
 
@@ -74,6 +83,7 @@ const PlayingArea = () => {
         className="find-image"
         id="find-image"
         src={cyberpunkScene}
+        draggable={false}
         alt="Isometric cyberpunk city illustration"
         onClick={handleClick}
       />
