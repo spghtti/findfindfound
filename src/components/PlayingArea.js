@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cyberpunkScene from '../images/Zurgetron.png';
 import HiddenObjects from './HiddenObjects';
 
@@ -6,10 +6,8 @@ const PlayingArea = () => {
   const [target, setTarget] = useState();
   const [hasClicked, setHasClicked] = useState(true);
 
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
   const showSelectionTarget = (e) => {
+    console.log(hasClicked);
     //find absolute coordinates
     const x = e.pageX;
     const y = e.pageY;
@@ -17,8 +15,6 @@ const PlayingArea = () => {
     const offsetHeight = e.target.offsetHeight;
     const relX = x / offsetWidth;
     const relY = (y - 50) / offsetHeight;
-
-    console.log([relX, relY]);
 
     const targetStyle = {
       outline: '4px solid white',
@@ -49,7 +45,7 @@ const PlayingArea = () => {
   const showDropdownMenu = (x, y) => {
     const dropdownMenuStyle = {
       position: 'absolute',
-      transform: 'translateX(45%) translateY(40%)',
+      transform: 'translateX(35%) translateY(30%)',
       width: '9rem',
       height: 'auto',
       visibility: `${hasClicked ? 'visible' : 'hidden'}`,
@@ -66,8 +62,8 @@ const PlayingArea = () => {
       },
       <HiddenObjects
         coords={[x, y]}
-        windowWidth={width}
-        windowHeight={height}
+        hasClicked={hasClicked}
+        setHasClicked={setHasClicked}
       />
     );
   };
