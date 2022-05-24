@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const HiddenObjects = (props) => {
+  useEffect(() => {});
+
   const importAll = (r) => {
     let images = {};
     r.keys().map((item, index) => {
@@ -15,30 +17,6 @@ const HiddenObjects = (props) => {
     require.context('../images/objects', false, /\.(png|jpe?g|svg)$/)
   );
 
-  const objectArray = [
-    {
-      name: 'Stand mixer',
-      value: 'mixer',
-      image: 'mixer',
-      link: '../images/mixer',
-      isFound: false,
-    },
-    {
-      name: 'Tropical bird',
-      value: 'bird',
-      image: 'bird',
-      link: '../images/bird',
-      isFound: false,
-    },
-    {
-      name: 'Golden egg',
-      value: 'egg',
-      image: 'egg',
-      link: '../images/egg',
-      isFound: false,
-    },
-  ];
-
   const checkAccuracy = (guessArray, answerArray) => {
     const xDiff = Math.abs((answerArray[0] - guessArray[0]) / guessArray[0]);
     const yDiff = Math.abs((answerArray[1] - guessArray[1]) / guessArray[1]);
@@ -50,34 +28,82 @@ const HiddenObjects = (props) => {
 
   async function checkGuess(value, coords) {
     const intCoords = [Number(coords[0]), Number(coords[1])];
-    console.log(`${value} => ${intCoords}`);
+    // console.log(`${value} => ${intCoords}`);
     const docRef = doc(db, 'locations', `${value}`);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data().location);
+    // console.log(docSnap.data().location);
     console.log(checkAccuracy(intCoords, docSnap.data().location));
+    return checkAccuracy(intCoords, docSnap.data().location);
   }
 
-  //  Need to fix double click bug
-  const hideMenu = () => {
-    const menu = document.getElementById('target');
-    const dropdown = document.getElementById('dropdown-menu');
-    menu.style.visibility = 'hidden';
-    dropdown.style.visibility = 'hidden';
+  const removeFromObjectList = (objectName) => {
+    const arr = props.objectArray.map((object) => ({ ...object }));
+    console.log(arr);
+
+    for (let i = 0; i < props.objectArray.length; i++) {
+      if (props.objectArray[i].value === objectName) {
+        console.log(`Found: slicing ${objectName} at ${i}`);
+        arr.splice(i, 1);
+        console.log(arr);
+        props.setObjectArray(arr);
+      }
+    }
+    console.log(props.objectArray);
   };
 
-  const handleSelection = (event) => {
-    checkGuess(event.target.attributes.value.value, props.coords);
-    // hideMenu();
+  async function handleSelection(event) {
+    const result = await checkGuess(
+      event.target.attributes.value.value,
+      props.coords
+    );
+
+    if (result) {
+      removeFromObjectList(event.target.attributes.value.value);
+      props.setHasFound(true);
+      setTimeout(() => {
+        props.setHasFound(false);
+      }, 1500);
+    } else {
+      props.setHasMissed(true);
+      setTimeout(() => {
+        props.setHasMissed(false);
+      }, 1500);
+    }
+  }
+
+  const renderObjects = () => {
+    props.objectArray.map((object, index) => (
+      <div
+        key={index}
+        className="hidden-object-list-item"
+        onClick={handleSelection}
+        value={object.value}
+        display="none"
+      >
+        <div className="hidden-object-list-item-icon-container">
+          <img
+            className="hidden-object-list-item-icon"
+            src={images[`${object.image}.png`]}
+            alt=""
+            value={object.value}
+          />
+        </div>
+        <div className="hidden-object-list-item-name" value={object.value}>
+          {object.name}
+        </div>
+      </div>
+    ));
   };
 
   return (
     <div className="hidden-object-list">
-      {objectArray.map((object, index) => (
+      {props.objectArray.map((object, index) => (
         <div
           key={index}
           className="hidden-object-list-item"
           onClick={handleSelection}
           value={object.value}
+          display="none"
         >
           <div className="hidden-object-list-item-icon-container">
             <img
@@ -91,7 +117,8 @@ const HiddenObjects = (props) => {
             {object.name}
           </div>
         </div>
-      ))}
+      ))}{' '}
+      {/* {renderObjects()} */}
     </div>
   );
 };

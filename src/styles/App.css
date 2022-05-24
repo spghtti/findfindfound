@@ -120,3 +120,22 @@ footer {
   justify-content: center;
   align-items: center;
 }
+.invisible {
+  display: none;
+  background: red;
+}
+.notification-bar {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: none;
+}
+.notification-content {
+  background: rgb(211, 196, 196);
+  font-size: 17px;
+  color: black;
+  padding: 15px 30px 15px 30px;
+  border-radius: 34px;
+  margin-top: 5px;
+}
