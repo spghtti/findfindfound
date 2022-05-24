@@ -7,7 +7,9 @@ const PlayingArea = () => {
   const [hasClicked, setHasClicked] = useState(true);
 
   const showSelectionTarget = (e) => {
-    console.log(hasClicked);
+    const viewHeight = e.target.scrollHeight;
+    const viewWidth = e.target.scrollWidth;
+
     //find absolute coordinates
     const x = e.pageX;
     const y = e.pageY;
@@ -19,8 +21,8 @@ const PlayingArea = () => {
     const targetStyle = {
       outline: '4px solid white',
       position: 'absolute',
-      width: '7vw',
-      height: '14vh',
+      width: '75px',
+      height: '75px',
       borderRadius: '50%',
       visibility: `${hasClicked ? 'visible' : 'hidden'}`,
     };
@@ -64,6 +66,9 @@ const PlayingArea = () => {
         coords={[x, y]}
         hasClicked={hasClicked}
         setHasClicked={setHasClicked}
+        showSelectionTarget={showSelectionTarget}
+        showDropdownMenu={showDropdownMenu}
+        handleClick={handleClick}
       />
     );
   };

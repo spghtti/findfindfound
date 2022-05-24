@@ -42,7 +42,7 @@ const HiddenObjects = (props) => {
   const checkAccuracy = (guessArray, answerArray) => {
     const xDiff = Math.abs((answerArray[0] - guessArray[0]) / guessArray[0]);
     const yDiff = Math.abs((answerArray[1] - guessArray[1]) / guessArray[1]);
-    if (xDiff < 0.103 && yDiff < 0.036) {
+    if (xDiff < 0.103 && yDiff < 0.075) {
       return true;
     }
     return false;
@@ -57,17 +57,17 @@ const HiddenObjects = (props) => {
     console.log(checkAccuracy(intCoords, docSnap.data().location));
   }
 
+  //  Need to fix double click bug
   const hideMenu = () => {
     const menu = document.getElementById('target');
     const dropdown = document.getElementById('dropdown-menu');
     menu.style.visibility = 'hidden';
     dropdown.style.visibility = 'hidden';
-    props.setHasClicked(true);
   };
 
   const handleSelection = (event) => {
     checkGuess(event.target.attributes.value.value, props.coords);
-    hideMenu();
+    // hideMenu();
   };
 
   return (
