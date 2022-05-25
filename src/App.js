@@ -1,17 +1,76 @@
 import './styles/App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-// const firebase = require('firebase');
-// require('firebase/firestore');
-
 function App() {
+  const [showModal, setShowModal] = useState(true);
+
+  const handleButtonClick = () => {
+    const body = document.body;
+    setShowModal(false);
+    body.style.overflowY = 'visible';
+  };
+
+  const renderModal = () => {
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-headline">
+            {' '}
+            <h2>Can you find us?</h2>
+          </div>
+          <div className="modal-description">
+            <span>
+              Objective: find all three objects as fast as possible. You can
+              submit your score and see how you stack up against other players!{' '}
+            </span>
+          </div>
+          <div className="modal-items">
+            <div className="modal-headline">
+              <h3>The targets:</h3>
+            </div>
+            <div className="modal-items-object">
+              <img
+                alt="stand mixer icon"
+                className="hidden-object-list-item-icon"
+                src={require('./images/objects/mixer.png')}
+              />
+              <h3>Stand mixer</h3>
+            </div>
+            <div className="modal-items-object">
+              <img
+                alt="tropical bird icon"
+                className="hidden-object-list-item-icon"
+                src={require('./images/objects/bird.png')}
+              />
+              <h3>Tropical bird</h3>
+            </div>
+            <div className="modal-items-object">
+              <img
+                alt="golden egg icon"
+                className="hidden-object-list-item-icon"
+                src={require('./images/objects/egg.png')}
+              />
+              <h3>Golden egg</h3>
+            </div>
+          </div>
+          <div className="modal-button-container">
+            <button className="modal-button" onClick={handleButtonClick}>
+              Start
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Header />
-      <PlayingArea />
+      {showModal && renderModal()}
+      <PlayingArea showModal={showModal} />
       <Footer />
     </div>
   );

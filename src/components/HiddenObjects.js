@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const HiddenObjects = (props) => {
-  useEffect(() => {});
-
   const importAll = (r) => {
     let images = {};
     r.keys().map((item, index) => {
@@ -52,6 +50,11 @@ const HiddenObjects = (props) => {
   };
 
   async function handleSelection(event) {
+    // const menu = document.getElementById('dropdown-menu');
+    // const target = document.getElementById('target');
+    // menu.style.visibility = 'hidden';
+    // target.style.visibility = 'hidden';
+
     const result = await checkGuess(
       event.target.attributes.value.value,
       props.coords
@@ -71,28 +74,8 @@ const HiddenObjects = (props) => {
     }
   }
 
-  const renderObjects = () => {
-    props.objectArray.map((object, index) => (
-      <div
-        key={index}
-        className="hidden-object-list-item"
-        onClick={handleSelection}
-        value={object.value}
-        display="none"
-      >
-        <div className="hidden-object-list-item-icon-container">
-          <img
-            className="hidden-object-list-item-icon"
-            src={images[`${object.image}.png`]}
-            alt=""
-            value={object.value}
-          />
-        </div>
-        <div className="hidden-object-list-item-name" value={object.value}>
-          {object.name}
-        </div>
-      </div>
-    ));
+  const handleMenuClick = (event) => {
+    handleSelection(event);
   };
 
   return (
@@ -101,7 +84,7 @@ const HiddenObjects = (props) => {
         <div
           key={index}
           className="hidden-object-list-item"
-          onClick={handleSelection}
+          onClick={handleMenuClick}
           value={object.value}
           display="none"
         >
@@ -118,7 +101,6 @@ const HiddenObjects = (props) => {
           </div>
         </div>
       ))}{' '}
-      {/* {renderObjects()} */}
     </div>
   );
 };

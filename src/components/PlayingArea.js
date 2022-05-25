@@ -3,7 +3,7 @@ import cyberpunkScene from '../images/Zurgetron.png';
 import HiddenObjects from './HiddenObjects';
 import NotificationBar from './NotificationBar';
 
-const PlayingArea = () => {
+const PlayingArea = (props) => {
   const [target, setTarget] = useState();
   const [hasClicked, setHasClicked] = useState(true);
   const [hasFound, setHasFound] = useState(false);
@@ -32,10 +32,11 @@ const PlayingArea = () => {
     },
   ]);
 
-  const showSelectionTarget = (e) => {
-    // const viewHeight = e.target.scrollHeight;
-    // const viewWidth = e.target.scrollWidth;
+  // useEffect(() => {
+  //   setHasClicked(true);
+  // }, [hasMissed, hasFound]);
 
+  const showSelectionTarget = (e) => {
     //find absolute coordinates
     const x = e.pageX;
     const y = e.pageY;
@@ -67,7 +68,6 @@ const PlayingArea = () => {
       showDropdownMenu(relX, relY)
     );
     setTarget(target);
-    hasClicked ? setHasClicked(false) : setHasClicked(true);
   };
 
   const showDropdownMenu = (x, y) => {
@@ -76,6 +76,7 @@ const PlayingArea = () => {
       transform: 'translateX(45%) translateY(40%)',
       width: '9rem',
       height: 'auto',
+      visibility: `${hasClicked ? 'visible' : 'hidden'}`,
     };
 
     return React.createElement(
@@ -97,14 +98,19 @@ const PlayingArea = () => {
         hasMissed={hasMissed}
         objectArray={objectArray}
         setObjectArray={setObjectArray}
+        showSelectionTarget={showSelectionTarget}
       />
     );
   };
 
   const handleClick = (event) => {
-    console.log(objectArray);
+    hasClicked ? setHasClicked(false) : setHasClicked(true);
     showSelectionTarget(event);
   };
+
+  // const imageBlur = {
+  //   filter: `${props.showModal ? 'blur(0px)' : 'blur(0px)'}`,
+  // };
 
   return (
     <div className="find-image-container">
@@ -122,6 +128,7 @@ const PlayingArea = () => {
         draggable={false}
         alt="Isometric cyberpunk city illustration"
         onClick={handleClick}
+        // style={imageBlur}
       />
     </div>
   );
