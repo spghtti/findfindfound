@@ -197,13 +197,14 @@ footer {
   font-weight: 600;
   cursor: pointer;
   color: white;
-  background: red;
+  background: rgb(0, 145, 255);
   border-style: none;
   width: 300px;
   height: 55px;
 }
 .modal-button:hover {
-  background: blue;
+  background: rgb(238, 0, 255);
+  transition: 0.2s ease-in;
 }
 h2 {
   font-weight: 700;
@@ -212,4 +213,8 @@ h2 {
 h3 {
   font-weight: 600;
   font-size: 25px;
+}
+.hidden-object-list-item-name {
+  font-size: 20px;
+  font-weight: 500;
 }

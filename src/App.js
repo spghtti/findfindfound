@@ -1,16 +1,31 @@
 import './styles/App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
   const [showModal, setShowModal] = useState(true);
+  const [timer, setTimer] = useState(0);
+  const [hasStarted, setHasStarted] = useState();
 
   const handleButtonClick = () => {
     const body = document.body;
     setShowModal(false);
+    startGame();
     body.style.overflowY = 'visible';
+  };
+
+  useEffect(() => {
+    if (hasStarted) {
+      setInterval(() => {
+        setTimer((prevTime) => prevTime + 1);
+      }, 1000);
+    }
+  }, [hasStarted]);
+
+  const startGame = () => {
+    setHasStarted(true);
   };
 
   const renderModal = () => {
@@ -37,7 +52,7 @@ function App() {
                 className="hidden-object-list-item-icon"
                 src={require('./images/objects/mixer.png')}
               />
-              <h3>Stand mixer</h3>
+              <h3 className="hidden-object-list-item-name">Stand mixer</h3>
             </div>
             <div className="modal-items-object">
               <img
@@ -45,7 +60,7 @@ function App() {
                 className="hidden-object-list-item-icon"
                 src={require('./images/objects/bird.png')}
               />
-              <h3>Tropical bird</h3>
+              <h3 className="hidden-object-list-item-name">Tropical bird</h3>
             </div>
             <div className="modal-items-object">
               <img
@@ -53,7 +68,7 @@ function App() {
                 className="hidden-object-list-item-icon"
                 src={require('./images/objects/egg.png')}
               />
-              <h3>Golden egg</h3>
+              <h3 className="hidden-object-list-item-name">Golden egg</h3>
             </div>
           </div>
           <div className="modal-button-container">
@@ -68,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header timer={timer} />
       {showModal && renderModal()}
       <PlayingArea showModal={showModal} />
       <Footer />
