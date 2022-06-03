@@ -85,7 +85,7 @@ function App() {
     <div className="App">
       <Header timer={timer} />
       {showModal && renderModal()}
-      <PlayingArea showModal={showModal} />
+      <PlayingArea showModal={showModal} timer={timer} />
       <Footer />
     </div>
   );

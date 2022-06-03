@@ -32,10 +32,6 @@ const PlayingArea = (props) => {
     },
   ]);
 
-  // useEffect(() => {
-  //   setHasClicked(true);
-  // }, [hasMissed, hasFound]);
-
   const showSelectionTarget = (e) => {
     //find absolute coordinates
     const x = e.pageX;
@@ -107,10 +103,6 @@ const PlayingArea = (props) => {
     hasClicked ? setHasClicked(false) : setHasClicked(true);
     showSelectionTarget(event);
   };
-
-  // const imageBlur = {
-  //   filter: `${props.showModal ? 'blur(0px)' : 'blur(0px)'}`,
-  // };
 
   return (
     <div className="find-image-container">

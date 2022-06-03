@@ -26,35 +26,43 @@ const HiddenObjects = (props) => {
 
   async function checkGuess(value, coords) {
     const intCoords = [Number(coords[0]), Number(coords[1])];
-    // console.log(`${value} => ${intCoords}`);
     const docRef = doc(db, 'locations', `${value}`);
     const docSnap = await getDoc(docRef);
-    // console.log(docSnap.data().location);
-    console.log(checkAccuracy(intCoords, docSnap.data().location));
     return checkAccuracy(intCoords, docSnap.data().location);
   }
 
   const removeFromObjectList = (objectName) => {
     const arr = props.objectArray.map((object) => ({ ...object }));
-    console.log(arr);
-
     for (let i = 0; i < props.objectArray.length; i++) {
       if (props.objectArray[i].value === objectName) {
-        console.log(`Found: slicing ${objectName} at ${i}`);
         arr.splice(i, 1);
-        console.log(arr);
         props.setObjectArray(arr);
       }
     }
-    console.log(props.objectArray);
+  };
+
+  const getTime = (time) => {
+    let arr = [...time];
+    const hours = Number(arr.slice(0, arr.indexOf(':')));
+    const minutes = Number(arr.slice(arr.indexOf(':') + 1).join(''));
+    console.log(`Hours: ${hours}. Minutes: ${minutes}`);
+    console.log(`Total time: ${hours * 60 + minutes}`);
+  };
+
+  const checkForWin = () => {
+    console.log(`Array length ${props.objectArray.length}`);
+    if (props.objectArray.length === 1 || props.objectArray.length === 0) {
+      const time = document.querySelector('.header-timer');
+
+      getTime(time.textContent);
+      console.log('won');
+      return true;
+    }
+    console.log('not won');
+    return false;
   };
 
   async function handleSelection(event) {
-    // const menu = document.getElementById('dropdown-menu');
-    // const target = document.getElementById('target');
-    // menu.style.visibility = 'hidden';
-    // target.style.visibility = 'hidden';
-
     const result = await checkGuess(
       event.target.attributes.value.value,
       props.coords
@@ -65,12 +73,13 @@ const HiddenObjects = (props) => {
       props.setHasFound(true);
       setTimeout(() => {
         props.setHasFound(false);
-      }, 1500);
+      }, 2000);
+      checkForWin();
     } else {
       props.setHasMissed(true);
       setTimeout(() => {
         props.setHasMissed(false);
-      }, 1500);
+      }, 2000);
     }
   }
 
