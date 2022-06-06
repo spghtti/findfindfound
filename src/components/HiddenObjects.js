@@ -53,9 +53,8 @@ const HiddenObjects = (props) => {
     console.log(`Array length ${props.objectArray.length}`);
     if (props.objectArray.length === 1 || props.objectArray.length === 0) {
       const time = document.querySelector('.header-timer');
-
+      props.setHasWon(true);
       getTime(time.textContent);
-      console.log('won');
       return true;
     }
     console.log('not won');
@@ -84,7 +83,9 @@ const HiddenObjects = (props) => {
   }
 
   const handleMenuClick = (event) => {
+    const image = document.getElementById('find-image');
     handleSelection(event);
+    image.click();
   };
 
   return (

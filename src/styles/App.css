@@ -130,6 +130,7 @@ footer {
   display: flex;
   justify-content: center;
   background: none;
+  pointer-events: none;
 }
 .notification-content {
   background: rgb(211, 196, 196);
@@ -233,4 +234,25 @@ h3 {
   100% {
     transform: scale(1);
   }
+}
+.win-modal-description {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-input {
+  width: 250px;
+  height: 35px;
+}
+.win-modal-button {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  background: rgb(0, 145, 255);
+  border-style: none;
+  width: 200px;
+  height: 35px;
 }

@@ -95,6 +95,8 @@ const PlayingArea = (props) => {
         objectArray={objectArray}
         setObjectArray={setObjectArray}
         showSelectionTarget={showSelectionTarget}
+        hasWon={props.hasWon}
+        setHasWon={props.setHasWon}
       />
     );
   };
@@ -120,7 +122,6 @@ const PlayingArea = (props) => {
         draggable={false}
         alt="Isometric cyberpunk city illustration"
         onClick={handleClick}
-        // style={imageBlur}
       />
     </div>
   );

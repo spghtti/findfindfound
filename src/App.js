@@ -8,6 +8,7 @@ function App() {
   const [showModal, setShowModal] = useState(true);
   const [timer, setTimer] = useState(0);
   const [hasStarted, setHasStarted] = useState();
+  const [hasWon, setHasWon] = useState(false);
 
   const handleButtonClick = () => {
     const body = document.body;
@@ -28,7 +29,7 @@ function App() {
     setHasStarted(true);
   };
 
-  const renderModal = () => {
+  const renderStartModal = () => {
     return (
       <div className="modal">
         <div className="modal-content">
@@ -81,11 +82,46 @@ function App() {
     );
   };
 
+  const renderWinModal = () => {
+    setHasStarted(false);
+    const time = document.querySelector('.header-timer').innerHTML;
+
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-headline">
+            {' '}
+            <h2>You won!</h2>
+          </div>
+          <div className="win-modal-description">
+            <h3>Your time is {time}</h3>
+            <input
+              type="text"
+              placeholder="Your name"
+              className="modal-input"
+            ></input>
+            <button className="win-modal-button">Submit</button>
+          </div>
+          <div className="leaderboard-container">
+            <h3>Leaderboard</h3>
+            <div className="leaderboard"></div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="App">
       <Header timer={timer} />
-      {showModal && renderModal()}
-      <PlayingArea showModal={showModal} timer={timer} />
+      {hasWon && renderWinModal()}
+      {showModal && renderStartModal()}
+      <PlayingArea
+        showModal={showModal}
+        timer={timer}
+        hasWon={hasWon}
+        setHasWon={setHasWon}
+      />
       <Footer />
     </div>
   );
