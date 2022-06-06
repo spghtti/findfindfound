@@ -83,8 +83,8 @@ function App() {
   };
 
   const renderWinModal = () => {
-    setHasStarted(false);
     const time = document.querySelector('.header-timer').innerHTML;
+    document.body.style.overflowY = 'hidden';
 
     return (
       <div className="modal">
