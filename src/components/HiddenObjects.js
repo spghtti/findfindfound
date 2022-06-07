@@ -54,6 +54,7 @@ const HiddenObjects = (props) => {
     if (props.objectArray.length === 1 || props.objectArray.length === 0) {
       const time = document.querySelector('.header-timer');
       props.setHasWon(true);
+      props.stopGame();
       getTime(time.textContent);
       return true;
     }

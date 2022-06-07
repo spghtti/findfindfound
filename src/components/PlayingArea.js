@@ -97,6 +97,7 @@ const PlayingArea = (props) => {
         showSelectionTarget={showSelectionTarget}
         hasWon={props.hasWon}
         setHasWon={props.setHasWon}
+        stopGame={props.stopGame}
       />
     );
   };

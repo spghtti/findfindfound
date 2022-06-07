@@ -133,9 +133,9 @@ footer {
   pointer-events: none;
 }
 .notification-content {
-  background: rgb(211, 196, 196);
+  background: rgb(0, 145, 255);
   font-size: 17px;
-  color: black;
+  color: white;
   padding: 15px 30px 15px 30px;
   border-radius: 34px;
   margin-top: 5px;

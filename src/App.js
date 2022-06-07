@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 function App() {
   const [showModal, setShowModal] = useState(true);
   const [timer, setTimer] = useState(0);
-  const [hasStarted, setHasStarted] = useState();
+  const [hasStarted, setHasStarted] = useState(false);
   const [hasWon, setHasWon] = useState(false);
 
   const handleButtonClick = () => {
@@ -19,14 +19,19 @@ function App() {
 
   useEffect(() => {
     if (hasStarted) {
-      setInterval(() => {
+      const interval = setInterval(() => {
         setTimer((prevTime) => prevTime + 1);
       }, 1000);
+      return () => clearInterval(interval);
     }
   }, [hasStarted]);
 
   const startGame = () => {
     setHasStarted(true);
+  };
+
+  const stopGame = () => {
+    setHasStarted(false);
   };
 
   const renderStartModal = () => {
@@ -83,7 +88,7 @@ function App() {
   };
 
   const renderWinModal = () => {
-    const time = document.querySelector('.header-timer').innerHTML;
+    const time = document.querySelector('.header-timer').textContent;
     document.body.style.overflowY = 'hidden';
 
     return (
@@ -121,6 +126,8 @@ function App() {
         timer={timer}
         hasWon={hasWon}
         setHasWon={setHasWon}
+        stopGame={stopGame}
+        hasStarted={hasStarted}
       />
       <Footer />
     </div>
