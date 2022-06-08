@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -107,10 +108,7 @@ function App() {
             ></input>
             <button className="win-modal-button">Submit</button>
           </div>
-          <div className="leaderboard-container">
-            <h3>Leaderboard</h3>
-            <div className="leaderboard"></div>
-          </div>
+          <Leaderboard />
         </div>
       </div>
     );

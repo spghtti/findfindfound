@@ -1,5 +1,5 @@
 import React from 'react';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const HiddenObjects = (props) => {
@@ -45,12 +45,9 @@ const HiddenObjects = (props) => {
     let arr = [...time];
     const hours = Number(arr.slice(0, arr.indexOf(':')));
     const minutes = Number(arr.slice(arr.indexOf(':') + 1).join(''));
-    console.log(`Hours: ${hours}. Minutes: ${minutes}`);
-    console.log(`Total time: ${hours * 60 + minutes}`);
   };
 
   const checkForWin = () => {
-    console.log(`Array length ${props.objectArray.length}`);
     if (props.objectArray.length === 1 || props.objectArray.length === 0) {
       const time = document.querySelector('.header-timer');
       props.setHasWon(true);
@@ -58,7 +55,6 @@ const HiddenObjects = (props) => {
       getTime(time.textContent);
       return true;
     }
-    console.log('not won');
     return false;
   };
 

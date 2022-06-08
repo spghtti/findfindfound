@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import cyberpunkScene from '../images/Zurgetron.png';
 import HiddenObjects from './HiddenObjects';
 import NotificationBar from './NotificationBar';
