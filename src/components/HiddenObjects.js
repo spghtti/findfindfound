@@ -41,18 +41,18 @@ const HiddenObjects = (props) => {
     }
   };
 
-  const getTime = (time) => {
-    let arr = [...time];
-    const hours = Number(arr.slice(0, arr.indexOf(':')));
-    const minutes = Number(arr.slice(arr.indexOf(':') + 1).join(''));
-  };
+  // const getTime = (time) => {
+  //   let arr = [...time];
+  //   const hours = Number(arr.slice(0, arr.indexOf(':')));
+  //   const minutes = Number(arr.slice(arr.indexOf(':') + 1).join(''));
+  // };
 
   const checkForWin = () => {
     if (props.objectArray.length === 1 || props.objectArray.length === 0) {
       const time = document.querySelector('.header-timer');
       props.setHasWon(true);
       props.stopGame();
-      getTime(time.textContent);
+      // getTime(time.textContent);
       return true;
     }
     return false;
