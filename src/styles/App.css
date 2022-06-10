@@ -213,6 +213,13 @@ footer {
   background: rgb(238, 0, 255);
   transition: 0.2s ease-in;
 }
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  align-items: center;
+}
 h2 {
   font-weight: 700;
   font-size: 40px;
@@ -248,6 +255,7 @@ h3 {
 .modal-input {
   width: 250px;
   height: 35px;
+  margin-bottom: 10px;
 }
 .win-modal-button {
   font-size: 20px;
@@ -284,9 +292,12 @@ h3 {
   padding-bottom: 5px;
   width: 300px;
   flex-direction: row;
-  gap: 20%;
   justify-content: right;
 }
 .leaderboard-entry-score {
   font-weight: 700;
+  width: 50px;
+}
+.leaderboard-entry-name {
+  margin-right: 40px;
 }

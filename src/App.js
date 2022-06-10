@@ -1,5 +1,7 @@
 import './styles/App.css';
 import React, { useState, useEffect } from 'react';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from './firebase';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -88,6 +90,25 @@ function App() {
     );
   };
 
+  const disableSubmit = () => {
+    const button = document.getElementById('win-modal-button');
+    button.disabled = true;
+    button.value = 'Submitted!';
+    button.style.backgroundColor = 'rgb(102,102,102)';
+    button.style.pointerEvents = 'none';
+  };
+
+  async function writeScore(name, playerScore) {
+    const docRef = doc(db, 'scores', 'highscores');
+    await updateDoc(docRef, { [name]: playerScore });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    writeScore(document.getElementById('win-modal-name-input').value, timer);
+    disableSubmit();
+  };
+
   const renderWinModal = () => {
     const time = document.querySelector('.header-timer').textContent;
     document.body.style.overflowY = 'hidden';
@@ -101,14 +122,30 @@ function App() {
           </div>
           <div className="win-modal-description">
             <h3>Your time is {time}</h3>
-            <input
-              type="text"
-              placeholder="Your name"
-              className="modal-input"
-            ></input>
-            <button className="win-modal-button">Submit</button>
+            <form
+              className="modal-form"
+              onSubmit={(event) => {
+                handleSubmit(event);
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Your name"
+                className="modal-input"
+                id="win-modal-name-input"
+                maxLength={20}
+                minLength={1}
+                required
+              ></input>
+              <input
+                className="win-modal-button"
+                id="win-modal-button"
+                type="submit"
+                value="Submit"
+              />
+            </form>
           </div>
-          <Leaderboard />
+          <Leaderboard timer={timer} />
         </div>
       </div>
     );

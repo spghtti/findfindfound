@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const Leaderboard = () => {
+const Leaderboard = (props) => {
   const [scores, setScores] = useState();
 
   useEffect(() => {
