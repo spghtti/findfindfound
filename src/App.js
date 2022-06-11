@@ -1,6 +1,6 @@
 import './styles/App.css';
 import React, { useState, useEffect } from 'react';
-import { doc, updateDoc } from 'firebase/firestore';
+import { addDoc, doc, updateDoc, collection } from 'firebase/firestore';
 import { db } from './firebase';
 import PlayingArea from './components/PlayingArea';
 import Header from './components/Header';
@@ -99,8 +99,10 @@ function App() {
   };
 
   async function writeScore(name, playerScore) {
-    const docRef = doc(db, 'scores', 'highscores');
-    await updateDoc(docRef, { [name]: playerScore });
+    await addDoc(collection(db, 'leaderboard'), {
+      name: name,
+      score: playerScore,
+    });
   }
 
   const handleSubmit = (e) => {

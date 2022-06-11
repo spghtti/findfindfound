@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDocs, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const Leaderboard = (props) => {
@@ -10,11 +10,12 @@ const Leaderboard = (props) => {
   }, []);
 
   async function fetchScores() {
-    const docRef = doc(db, 'scores', 'highscores');
-    const docSnap = await getDoc(docRef);
+    const docRef = collection(db, 'leaderboard');
+    const docs = await getDocs(docRef);
+    // const docSnap = await getDoc(docRef);
     let highScores = [];
-    Object.entries(docSnap.data()).forEach((score) => {
-      highScores.push(score);
+    docs.forEach((doc) => {
+      highScores.push([doc.data().name, doc.data().score]);
     });
     highScores = highScores.sort(function (a, b) {
       return a[1] - b[1];
