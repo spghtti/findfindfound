@@ -28,7 +28,7 @@ npm start
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Create-React-App](https://create-react-app.dev/)
-- [Firebase](https://firebase.google.com/)
+- [Firestore](https://firebase.google.com/)
 
 ## License
 
